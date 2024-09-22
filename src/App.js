@@ -66,7 +66,7 @@ function App() {
 
   return (
     <div>
-      <h1>ABCD123 - JSON Processor</h1>
+      <h1>API-Input</h1>
       <textarea
         rows="5"
         cols="50"
