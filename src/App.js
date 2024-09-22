@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
+import { useEffect } from "react";
+
+useEffect(() => {
+  document.title = "ABCD123";
+}, []);
+
 
 function App() {
   const [jsonInput, setJsonInput] = useState("");
@@ -31,23 +37,14 @@ function App() {
 
       // Send request to backend
       axios
-        .post('https://bsimpl.vercel.app/bfhl', jsonData)
+        .post("https://your-backend-api-url/bfhl", jsonData)
         .then((response) => {
           setApiResponse(response.data);
           setOptions(filterOptions);
         })
         .catch((err) => {
           console.error(err);
-          if (err.response) {
-            // Server responded with a status other than 200
-            setError("API request failed: " + err.response.data.message);
-          } else if (err.request) {
-            // Request was made but no response received
-            setError("No response from server. CORS issue might be causing this.");
-          } else {
-            // Something else happened in making the request
-            setError("Error: " + err.message);
-          }
+          setError("API request failed");
         });
     } catch (e) {
       setError("Invalid JSON format");
@@ -74,7 +71,7 @@ function App() {
 
   return (
     <div>
-      <h1>API-Input</h1>
+      <h1>ABCD123 - JSON Processor</h1>
       <textarea
         rows="5"
         cols="50"
