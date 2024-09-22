@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 
-
 function App() {
   const [jsonInput, setJsonInput] = useState("");
   const [apiResponse, setApiResponse] = useState(null);
@@ -39,7 +38,16 @@ function App() {
         })
         .catch((err) => {
           console.error(err);
-          setError("API request failed");
+          if (err.response) {
+            // Server responded with a status other than 200
+            setError("API request failed: " + err.response.data.message);
+          } else if (err.request) {
+            // Request was made but no response received
+            setError("No response from server. CORS issue might be causing this.");
+          } else {
+            // Something else happened in making the request
+            setError("Error: " + err.message);
+          }
         });
     } catch (e) {
       setError("Invalid JSON format");
